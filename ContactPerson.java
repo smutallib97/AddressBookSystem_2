@@ -1,18 +1,15 @@
 package com.bridgelabz.addressbook;
 
-import java.util.Scanner;
-
 public class ContactPerson {
-    String firstName;
-    String lastName;
-    String address;
-    String city;
-    String email;
-    String state;
-    int zip;
-    Long phoneNumber;
+    private String firstName;
+    private String lastName;
+    private String address;
+    private String city;
+    private String email;
+    private String state;
+    private int zip;
+    private Long phoneNumber;
 
-    Scanner sc = new Scanner(System.in);
 
     public String getFirstName() {
         return firstName;
@@ -90,7 +87,6 @@ public class ContactPerson {
         this.state = state;
     }
     public ContactPerson(){
-
     }
 
     @Override

@@ -3,43 +3,46 @@ package com.bridgelabz.addressbook;
 import java.util.*;
 
 public class AddressBookManager {
-    Map<String, LinkedList> addressbook = new HashMap<String, LinkedList>();
+    AddressBookFileIOService addressBookFileIOService = new AddressBookFileIOService();
+    Map<String, LinkedList> addressBookMap = new HashMap<String, LinkedList>();
     Scanner scanner = new Scanner(System.in);
 
 
     public void createAddressBook() {
         System.out.println("Enter the name of a AddressBook: ");
         String addressBookName = scanner.next();
-        if (addressbook.containsKey(addressBookName))
+        if (addressBookMap.containsKey(addressBookName))
             System.out.println("AddressBook is already present");
         else
-            addressbook.put(addressBookName, new LinkedList<ContactPerson>());
-        System.out.println(addressbook.keySet());
+            addressBookMap.put(addressBookName, new LinkedList<ContactPerson>());
+        System.out.println(addressBookMap.keySet());
     }
 
-    //@addContact verifies the addressBookName entered by the user. if not matches it will show exception.
-    public boolean addContact(String addressBookName, ContactPerson obj) {
-        if (addressbook.containsKey(addressBookName) == false) {
+    public boolean checkAddressBookandaddContact(String addressBookName, ContactPerson obj) {
+        if (addressBookMap.containsKey(addressBookName) == false) {
             throw new RuntimeException("AddressBook not present");
         }
         System.out.println(obj + "AddressBook name: " + addressBookName);
-        addressbook.get(addressBookName).add(obj);
+        addressBookMap.get(addressBookName).add(obj);
         return true;
     }
-    //@editContact verifies the addressBookName entered by the user. if not matches it will show exception.
 
     public boolean editContact(String addressBookName, ContactPerson obj) {
-        if (addressbook.containsKey(addressBookName) == false) {
+        if (addressBookMap.containsKey(addressBookName) == false) {
             throw new RuntimeException("AddressBook not present");
         }
         System.out.println(obj + "AddressBook name: " + addressBookName);
-        addressbook.get(addressBookName).add(obj);
+        addressBookMap.get(addressBookName).add(obj);
         return true;
     }
 
     public List getContactByAddressBook(String addressBookName) {
-        List contacts = addressbook.get(addressBookName);
+        List contacts = addressBookMap.get(addressBookName);
         contacts.forEach(contact -> System.out.println(contact));
         return contacts;
     }
+    public void writeDataInFile(){
+        addressBookMap.forEach((addressBookName,contacts)->addressBookFileIOService.writeData(contacts,addressBookName));
+    }
+
 }
