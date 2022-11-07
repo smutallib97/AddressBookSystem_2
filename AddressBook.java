@@ -201,5 +201,10 @@ public class AddressBook {
         List<ContactPerson> contactPersonList = list.stream().sorted((o1, o2) -> o1.getFirstName().compareTo(o2.getFirstName())).collect(Collectors.toList());
         contactPersonList.forEach(System.out::println);
     }
+    public void sortByZip(){
+        System.out.println("AddressBook present are" + addressBookManager.addressbook.keySet());
+        List<ContactPerson> sortedList = list.stream().sorted(Comparator.comparingInt(ContactPerson::getZip)).collect(Collectors.toList());
+        sortedList.forEach(System.out::println);
+    }
 
 }
